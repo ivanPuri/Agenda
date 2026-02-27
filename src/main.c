@@ -64,24 +64,25 @@ void display_course(char* course){
 
 void display_all(){}
 
-int main(int argc, char** argv){
+/*
+    int main(int argc, char** argv){
+        if (argc == 1)
+            display_all();
+        else if(argc == 3){
+            if (strcmp(argv[1], "edit") == 0)
+                edit(argv[2]);
+            else if(strcmp(argv[1], "done") == 0 )
+                done(argv[2]);
+            else if(strcmp(argv[1], "display") == 0)
+                display_course(argv[2]);
+        }else if (argc == 4){
+            if (strcmp(argv[1], "display") == 0)
+                display_item(argv[2], argv[3]);
+        }else if (argc == 5){
+            if (strcmp(argv[1], "add") == 0)
+                add(argv[2], argv[3], argv[4]);
+        }    
 
-    if (argc == 1)
-        display_all();
-    else if(argc == 3){
-        if (strcmp(argv[1], "edit") == 0)
-            edit(argv[2]);
-        else if(strcmp(argv[1], "done") == 0 )
-            done(argv[2]);
-        else if(strcmp(argv[1], "display") == 0)
-            display_course(argv[2]);
-    }else if (argc == 4){
-        if (strcmp(argv[1], "display") == 0)
-            display_item(argv[2], argv[3]);
-    }else if (argc == 5){
-        if (strcmp(argv[1], "add") == 0)
-            add(argv[2], argv[3], argv[4]);
-    }    
-
-    return 0;
-}
+        return 0;
+    }
+*/
