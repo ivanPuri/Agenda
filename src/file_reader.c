@@ -1,0 +1,105 @@
+#include "../headers/time_parser.h"
+#include <stdbool.h>
+#include "../headers/linkedlist.h"
+
+#define FILE_NAME "ape.bin"
+#define MAGIC "APE"
+
+
+
+
+//==================================================
+// LOW LEVEL FUNCTIONS
+//==================================================
+
+static FILE* get_fp(){
+    FILE* fp = fopen(FILE_NAME, "r+b");
+    if (fp != NULL) return fp;
+
+    else {
+        printf("fopen returned NULL: %s", FILE_NAME);        
+        return NULL;
+    }
+}
+ 
+static bool valid_magic(FILE* fp){
+    char buffer[4];
+    fread(buffer, sizeof(MAGIC), 1, fp);  
+
+    if (strcmp(buffer, MAGIC) == 0) return true;
+    else return false;
+}
+
+static int get_num_courses(FILE* fp){
+    int* number_of_courses = NULL;
+    fread(number_of_courses, sizeof(int), 1, fp);
+    return *number_of_courses;  
+}
+
+
+//==================================================
+// HIGH LEVEL FUNCTIONS
+//==================================================
+
+bool unload(int list_size){ // DO NOT write pointers 
+    FILE* fp = get_fp();
+    if (valid_magic(fp)){
+        fwrite(&list_size, sizeof(int), 1, fp); // the total number of course nodes in the list 
+
+        for(Course* curr = clist_head; curr != NULL; curr = curr->next){ // writing every course node
+            fwrite(&curr->name, sizeof(curr->name), 1, fp);
+            fwrite(&curr->list_size, sizeof(curr->list_size), 1, fp);
+            for(Item* curr_item = curr->item_head; curr_item != NULL; curr_item = curr_item->next){ // writing every item node per course node
+                fwrite(&curr_item->due_date, sizeof(curr_item->due_date), 1, fp);
+                fwrite(&curr_item->name, sizeof(curr_item->name), 1, fp);
+            }            
+        }
+        fclose(fp);
+        return true;
+    }
+    fclose(fp);
+    return false;
+}
+
+int load_in(){
+    FILE* fp = get_fp();
+    int num_courses;
+
+    if (valid_magic(fp)){
+        int num_items;
+        num_courses = get_num_courses(fp);
+        Item* item;
+        Course* tmp;
+
+        for(int i = 0; i < num_courses; i++){
+            Course* course = (Course*) calloc(1, sizeof(Course));
+            
+            if (i == 0) clist_head = course;
+
+            fread(&course->name, 1, sizeof(course->name), fp);
+            fread(&course->list_size, sizeof(course->list_size), 1, fp);
+          
+            if (i > 0) tmp->next = course;
+            tmp = course;
+            Item* itmp;
+
+            for (int b = 0; b < course->list_size; b++){
+                item = (Item*) calloc(1, sizeof(Item));
+                
+                if (b == 0){
+                  course->item_head = item;
+                  itmp = item;  
+                } else itmp->next = item;
+                
+                fread(&item->due_date, sizeof(item->due_date), 1, fp);
+                fread(&item->name, sizeof(item->name), 1, fp);
+            }
+            
+            course->item_tail = item;
+        }
+    }else 
+        num_courses = -1;
+
+    fclose(fp);
+    return num_courses;
+}
