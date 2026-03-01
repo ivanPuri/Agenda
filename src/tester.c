@@ -5,7 +5,17 @@
 void test1(){ 
     char* assignment_name = "hw1";
     char* course_name = "449";
-    char* date = "friday";
+    char* date = "Monday";
+    add(assignment_name, course_name, date);
+
+    char* assignment_name = "hw1";
+    char* course_name = "590";
+    char* date = "Wednesday";
+    add(assignment_name, course_name, date);
+
+    char* assignment_name = "hw1";
+    char* course_name = "1530";
+    char* date = "Friday";
     add(assignment_name, course_name, date);
 
 }
@@ -22,22 +32,24 @@ void test3(){}
 
 int main(int argc, char** argv){
 
-    if (argc == 1)
-        display_all();
-    else if(argc == 3){
-        if (strcmp(argv[1], "edit") == 0)
-            edit(argv[2]);
-        else if(strcmp(argv[1], "done") == 0 )
-            done(argv[2]);
-        else if(strcmp(argv[1], "display") == 0)
-            display_course(argv[2]);
-    }else if (argc == 4){
-        if (strcmp(argv[1], "display") == 0)
-            display_item(argv[2], argv[3]);
-    }else if (argc == 5){
-        if (strcmp(argv[1], "add") == 0)
-            add(argv[2], argv[3], argv[4]);
-    }    
+    test1();
+
+    // if (argc == 1)
+    //     display_all();
+    // else if(argc == 3){
+    //     if (strcmp(argv[1], "edit") == 0)
+    //         edit(argv[2]);
+    //     else if(strcmp(argv[1], "done") == 0 )
+    //         done(argv[2]);
+    //     else if(strcmp(argv[1], "display") == 0)
+    //         display_course(argv[2]);
+    // }else if (argc == 4){
+    //     if (strcmp(argv[1], "display") == 0)
+    //         display_item(argv[2], argv[3]);
+    // }else if (argc == 5){
+    //     if (strcmp(argv[1], "add") == 0)
+    //         add(argv[2], argv[3], argv[4]);
+    // }    
 
     return 0;
 }
