@@ -8,31 +8,109 @@ void test1(){
     char* date = "Monday";
     add(assignment_name, course_name, date);
 
-    char* assignment_name = "hw1";
-    char* course_name = "590";
-    char* date = "Wednesday";
+    assignment_name = "hw2";
+    course_name = "590";
+    date = "Wednesday";
     add(assignment_name, course_name, date);
 
-    char* assignment_name = "hw1";
-    char* course_name = "1530";
-    char* date = "Friday";
+    assignment_name = "hw3";
+    course_name = "1530";
+    date = "Friday";
     add(assignment_name, course_name, date);
 
+    printf("\n\nFINAL PRINT CHECK\n");
+    print_all_courses();
 }
 
-
-
 //this test is going to add 3 items all in the same course and then display the course_list and the whole item list for that course
-void test2(){}
+void test2(){
+    char* assignment_name = "hw1";
+    char* course_name = "449";
+    char* date = "Monday";
+    add(assignment_name, course_name, date);
 
-//this test is going to write 3 items to 3 different courses and then write to a file, it will then set clist_head to NULL and read from the file and display the new list. DONT FORGET TO FREE ALL OF THE HEAP SPACE BEFORE YOU GO AND FUCK SOME SHIT UP
-void test3(){}
+    assignment_name = "hw2";
+    course_name = "449";
+    date = "Wednesday";
+    add(assignment_name, course_name, date);
+
+    assignment_name = "hw3";
+    course_name = "449";
+    date = "Friday";
+    add(assignment_name, course_name, date);
 
 
+    printf("\n\nFINAL PRINT CHECK\n");
+    print_course(course_name);
+}
+
+//this test is going to write 3 items to 3 different courses and then write to a file 
+void test3(){
+    //course 1
+    char* assignment_name = "hw1";
+    char* course_name = "449";
+    char* date = "Monday";
+    add(assignment_name, course_name, date);
+
+    assignment_name = "hw2";
+    course_name = "449";
+    date = "Wednesday";
+    add(assignment_name, course_name, date);
+
+    assignment_name = "hw3";
+    course_name = "449";
+    date = "Friday";
+    add(assignment_name, course_name, date);
+
+    //course 2
+    assignment_name = "hw4";
+    course_name = "590";
+    date = "Monday";
+    add(assignment_name, course_name, date);
+
+    assignment_name = "hw5";
+    course_name = "590";
+    date = "Wednesday";
+    add(assignment_name, course_name, date);
+
+    assignment_name = "hw6";
+    course_name = "590";
+    date = "Friday";
+    add(assignment_name, course_name, date);
+
+    //course 3
+    assignment_name = "hw7";
+    course_name = "1530";
+    date = "Monday";
+    add(assignment_name, course_name, date);
+
+    assignment_name = "hw8";
+    course_name = "1530";
+    date = "Wednesday";
+    add(assignment_name, course_name, date);
+
+    assignment_name = "hw9";
+    course_name = "1530";
+    date = "Friday";
+    add(assignment_name, course_name, date);
+
+    printf("\n\nFINAL PRINT CHECK\n");
+    print_all_courses();
+}
+
+// this test is going to check the write to a file and the read from a file, 
+//!DONT FORGET TO FREE ALL OF THE HEAP SPACE BEFORE YOU GO AND FUCK SOME SHIT UP
+void test4(){
+    test1();
+    start();
+    // unload(clist_size);
+    // int size = load_in();
+    // printf("size = %i", size);
+}
 
 int main(int argc, char** argv){
 
-    test1();
+    test4();
 
     // if (argc == 1)
     //     display_all();

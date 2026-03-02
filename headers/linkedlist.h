@@ -1,9 +1,9 @@
 #pragma once
-
+#include <stdio.h>
 #include <stdlib.h>
-#include "time_parser.h"
 #include <stdbool.h>
 #include <time.h>
+#include <string.h>
 #include "file_reader.h"
 
 
@@ -28,7 +28,8 @@ typedef struct Course {
 extern int clist_size;
 extern Course* clist_head;
 
-void create_course(Course* new_course);
+void create_course(Course* new_course, char* course_name);
 void create_item(Item* new_item, Course* course, char* course_name);
 bool is_new_course(char* name);
 void print_course(char* course_name);
+void print_all_courses();

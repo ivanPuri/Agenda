@@ -1,4 +1,3 @@
-#include "../headers/time_parser.h"
 #include <stdbool.h>
 #include "../headers/linkedlist.h"
 
@@ -12,6 +11,8 @@
 // LOW LEVEL FUNCTIONS
 //==================================================
 
+
+
 static FILE* get_fp(){
     FILE* fp = fopen(FILE_NAME, "r+b");
     if (fp != NULL) return fp;
@@ -23,8 +24,14 @@ static FILE* get_fp(){
 }
  
 static bool valid_magic(FILE* fp){
+    fseek(fp, 0, SEEK_SET);
     char buffer[4];
-    fread(buffer, sizeof(MAGIC), 1, fp);  
+    fread(buffer, sizeof(MAGIC) - 1 , 1, fp);  
+    buffer[3] = '\0';
+
+    //test
+    printf("buffer: %s\n",buffer);
+    printf(MAGIC);
 
     if (strcmp(buffer, MAGIC) == 0) return true;
     else return false;
@@ -35,6 +42,7 @@ static int get_num_courses(FILE* fp){
     fread(number_of_courses, sizeof(int), 1, fp);
     return *number_of_courses;  
 }
+
 
 
 //==================================================
@@ -102,4 +110,16 @@ int load_in(){
 
     fclose(fp);
     return num_courses;
+}
+
+void start(void){
+    FILE *fp = get_fp();
+    // writing just the MAGIC characters, not the null terminator, hence -1
+    fwrite(MAGIC, 1, sizeof(MAGIC)-1, fp);
+    bool valid = valid_magic(fp);
+    printf("valid: %i", valid);
+    
+    fclose(fp);
+
+
 }

@@ -14,12 +14,11 @@
 
 static time_t valid_date(char* input_date){
     //"25 21:30";
-    time_t date = vtp(input_date);
-    if (date == (time_t) - 1)
-        return (time_t) -1;
-    else
-        return date;
-    
+    // time_t date = vtp(input_date);
+    // if (date == (time_t) - 1)
+    //     return (time_t) -1;
+    // else
+    //     return date;
 }
 
 // =======================================================
@@ -32,11 +31,11 @@ Item* done(char* name){
 
 void add(char* name, char* course, char* due){
 
-    time_t date = valid_date(due);
-    if (date == (time_t) - 1){
-        printf("invalid date: %s\n", due);
-        return;
-    }//date is valid
+    time_t date = time(NULL);
+    // if (date == (time_t) - 1){
+    //     printf("invalid date: %s\n", due);
+    //     return;
+    // }//date is valid
 
 
     Item* new_item = (Item*) calloc(1, sizeof(Item));
@@ -46,7 +45,7 @@ void add(char* name, char* course, char* due){
 
     if (is_new_course(course)){
        Course* new_course = (Course*) calloc(1, sizeof(Course));
-       create_course(new_course);     
+       create_course(new_course, course);     
        create_item(new_item, new_course, course);
    }else{
        create_item(new_item, NULL, course);    
