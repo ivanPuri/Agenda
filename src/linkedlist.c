@@ -61,7 +61,7 @@ static Course* get_course_node(char* course_name){
 
 static void add_item(Item* new_item, Course* course){
     node_link( course,  new_item, false); 
-    course->list_size++;       
+    course->list_size++;    
 }
 
 static void print_course_iterate(Course* course){
@@ -90,6 +90,7 @@ void create_item(Item* new_item, Course* course, char* course_name){
         if (course->item_head == NULL){
                 course->item_head = new_item;
                 course->item_tail = course->item_head;
+                course->list_size++;
         }else{
                 add_item(new_item, course);   
         }

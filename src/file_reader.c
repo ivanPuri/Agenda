@@ -84,15 +84,18 @@ int load_in(){
             if (i > 0) tmp->next = course;
             tmp = course;
             Item* itmp;
-
+            
             for (int b = 0; b < course->list_size; b++){
                 item = (Item*) calloc(1, sizeof(Item));
                 
                 if (b == 0){
                   course->item_head = item;
                   itmp = item;  
-                } else itmp->next = item;
-                
+                } else {
+                    itmp->next = item;
+                    itmp = item;
+                }
+
                 fread(&item->due_date, sizeof(item->due_date), 1, fp);
                 fread(&item->name, sizeof(item->name), 1, fp);
             }

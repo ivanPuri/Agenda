@@ -40,11 +40,11 @@ void test2(){
     add(assignment_name, course_name, date);
 
 
-    printf("\n\nFINAL PRINT CHECK\n");
-    print_course(course_name);
+    // printf("\n\nFINAL PRINT CHECK\n");
+    // print_course(course_name);
 }
 
-//this test is going to write 3 items to 3 different courses and then write to a file 
+//this test is going to write 3 items to 3 different courses 
 void test3(){
     //course 1
     char* assignment_name = "hw1";
@@ -94,23 +94,24 @@ void test3(){
     date = "Friday";
     add(assignment_name, course_name, date);
 
-    printf("\n\nFINAL PRINT CHECK\n");
-    print_all_courses();
+    // printf("\n\nFINAL PRINT CHECK\n");
+    // print_all_courses();
 }
 
 // this test is going to check the write to a file and the read from a file, 
 //!DONT FORGET TO FREE ALL OF THE HEAP SPACE BEFORE YOU GO AND FUCK SOME SHIT UP
 void test4(){
-    // test1(); // populating memory
-
-    // start(); // function for getting the ape.bin magic written
-
-    // unload(clist_size); // 
-    int size = load_in();
-
-    // printf("size = %i", size);
+    start(); // function for getting the ape.bin magic written
     
-    // print_course("1530");
+    test3(); // populating memory
+
+    unload(clist_size); // 
+    // int size = load_in();
+
+    // printf("size = %i\n\n\n", size);
+    printf("\n\n\n\n\MAIN PRINT CHECK\n");
+    
+    print_all_courses();
 }
 
 int main(int argc, char** argv){
