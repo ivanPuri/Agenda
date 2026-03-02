@@ -101,11 +101,16 @@ void test3(){
 // this test is going to check the write to a file and the read from a file, 
 //!DONT FORGET TO FREE ALL OF THE HEAP SPACE BEFORE YOU GO AND FUCK SOME SHIT UP
 void test4(){
-    test1();
-    start();
-    // unload(clist_size);
-    // int size = load_in();
+    // test1(); // populating memory
+
+    // start(); // function for getting the ape.bin magic written
+
+    // unload(clist_size); // 
+    int size = load_in();
+
     // printf("size = %i", size);
+    
+    // print_course("1530");
 }
 
 int main(int argc, char** argv){

@@ -5,13 +5,9 @@
 #define MAGIC "APE"
 
 
-
-
 //==================================================
 // LOW LEVEL FUNCTIONS
 //==================================================
-
-
 
 static FILE* get_fp(){
     FILE* fp = fopen(FILE_NAME, "r+b");
@@ -30,20 +26,18 @@ static bool valid_magic(FILE* fp){
     buffer[3] = '\0';
 
     //test
-    printf("buffer: %s\n",buffer);
-    printf(MAGIC);
+    // printf("buffer: %s\n",buffer);
+    // printf(MAGIC);
 
     if (strcmp(buffer, MAGIC) == 0) return true;
     else return false;
 }
 
 static int get_num_courses(FILE* fp){
-    int* number_of_courses = NULL;
-    fread(number_of_courses, sizeof(int), 1, fp);
-    return *number_of_courses;  
+    int number_of_courses;
+    fread(&number_of_courses, sizeof(int), 1, fp);
+    return number_of_courses;  
 }
-
-
 
 //==================================================
 // HIGH LEVEL FUNCTIONS

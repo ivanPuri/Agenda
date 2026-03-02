@@ -60,7 +60,8 @@ static Course* get_course_node(char* course_name){
 }
 
 static void add_item(Item* new_item, Course* course){
-    node_link( course,  new_item, false);        
+    node_link( course,  new_item, false); 
+    course->list_size++;       
 }
 
 static void print_course_iterate(Course* course){
