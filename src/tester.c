@@ -122,8 +122,8 @@ void test5(){
 
 
 int main(int argc, char** argv){
-    load_in();
-    test5();
+    // load_in();
+    test1();
 
     // if (argc == 1)
     //     display_all();

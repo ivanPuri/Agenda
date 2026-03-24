@@ -5,7 +5,7 @@ from zoneinfo import ZoneInfo
 
 NY = ZoneInfo("America/New_York")
 
-def parse_user_datetime_dateparser(text: str, tz="America/New_York") -> datetime:
+def parse_user_datetime_dateparser(text: str, tz="America/New_York") -> int:
     dt = dateparser.parse(
         text,
         settings={
@@ -21,8 +21,7 @@ def parse_user_datetime_dateparser(text: str, tz="America/New_York") -> datetime
 
     # Normalize to New York time
     dt = dt.astimezone(NY)
-
-    return dt
+    return epoch(dt)
 
 
 def epoch(dt: datetime) -> int:
@@ -35,7 +34,5 @@ def main():
     for i in range(3):
         ape = input("input date in different formats\n");
         date = parse_user_datetime_dateparser(ape);
-        print(normalise(date))
-        print(epoch(date))
         
-main()
+# main()

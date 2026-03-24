@@ -6,18 +6,50 @@
 
 
 
-
 // =======================================================
 // low level functions
 // =======================================================
 
 static time_t valid_date(char* input_date){
-    //"25 21:30";
-    // time_t date = vtp(input_date);
-    // if (date == (time_t) - 1)
-    //     return (time_t) -1;
-    // else
-    //     return date;
+
+    PyObject *pName, *pModule, *pFunc, *pArgs, *pValue;
+    time_t result_time = (time_t)-1;
+    
+    Py_Initialize();
+    // Add src/ to Python path
+    PyObject *sys = PyImport_ImportModule("sys");
+    PyObject *path = PyObject_GetAttrString(sys, "path");
+    PyList_Append(path, PyUnicode_FromString("src"));
+    Py_DECREF(sys);
+    Py_DECREF(path);
+    pName = PyUnicode_FromString("parses");
+    pModule = PyImport_Import(pName);
+    
+    if (pModule == NULL) {
+        PyErr_Print();
+        Py_DECREF(pName);
+        return (time_t)-1;
+    }
+    
+    pFunc = PyObject_GetAttrString(pModule, "parse_user_datetime_dateparser");
+    pArgs = PyTuple_New(1);
+    PyTuple_SetItem(pArgs, 0, PyUnicode_FromString(input_date));
+    
+    pValue = PyObject_CallObject(pFunc, pArgs);
+    
+    if (pValue != NULL) {
+        result_time = (time_t)PyLong_AsLong(pValue);
+        Py_DECREF(pValue);
+    } else {
+        PyErr_Print();
+    }
+    
+    Py_DECREF(pFunc);
+    Py_DECREF(pArgs);
+    Py_DECREF(pModule);
+    Py_DECREF(pName);
+    
+    return result_time;
 }
 
 // =======================================================
@@ -30,17 +62,17 @@ Item* done(char* name){
 
 void add(char* name, char* course, char* due){
 
-    time_t date = time(NULL);
-    // if (date == (time_t) - 1){
-    //     printf("invalid date: %s\n", due);
-    //     return;
-    // }//date is valid
+    time_t date = valid_date(due);
+    if (date == (time_t) - 1){
+        printf("invalid date: %s\n", due);
+        return;
+    }//date is valid
 
 
     Item* new_item = (Item*) calloc(1, sizeof(Item));
     strcpy(new_item->name, name);
     new_item->due_date = date;
-
+    new_item->due_date = date;
 
     if (is_new_course(course)){
        Course* new_course = (Course*) calloc(1, sizeof(Course));
