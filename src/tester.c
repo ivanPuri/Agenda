@@ -122,7 +122,7 @@ void test5(){
 
 
 int main(int argc, char** argv){
-
+    load_in();
     test5();
 
     // if (argc == 1)
