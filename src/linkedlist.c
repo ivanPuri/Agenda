@@ -121,6 +121,7 @@ void print_course(char* course_name){
 }
 
 void print_all_courses(){
+
     if (clist_head == NULL) printf("list empty");
     else{
         for (Course* curr = clist_head; curr != NULL; curr = curr->next){
@@ -128,3 +129,6 @@ void print_all_courses(){
         }
     }
 }
+
+
+

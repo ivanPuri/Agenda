@@ -1,5 +1,5 @@
 #include "../headers/main.h"
-
+#include "../headers/tui.h"
 
 // this test is supposed to add 3 items all to different courses and then print the whole course_list
 void test1(){ 
@@ -40,8 +40,8 @@ void test2(){
     add(assignment_name, course_name, date);
 
 
-    // printf("\n\nFINAL PRINT CHECK\n");
-    // print_course(course_name);
+    printf("\n\nFINAL PRINT CHECK\n");
+    print_course(course_name);
 }
 
 //this test is going to write 3 items to 3 different courses 
@@ -94,8 +94,8 @@ void test3(){
     date = "Friday";
     add(assignment_name, course_name, date);
 
-    // printf("\n\nFINAL PRINT CHECK\n");
-    // print_all_courses();
+    printf("\n\nFINAL PRINT CHECK\n");
+    print_all_courses();
 }
 
 // this test is going to check the write to a file and the read from a file, 
@@ -105,18 +105,25 @@ void test4(){
     
     test3(); // populating memory
 
-    unload(clist_size); // 
+    unload(clist_size); 
     // int size = load_in();
 
     // printf("size = %i\n\n\n", size);
-    printf("\n\n\n\n\MAIN PRINT CHECK\n");
+    printf("\n\n\n\n MAIN PRINT CHECK\n");
     
     print_all_courses();
 }
 
+
+void test5(){
+   start_window(); 
+}
+
+
+
 int main(int argc, char** argv){
 
-    test4();
+    test5();
 
     // if (argc == 1)
     //     display_all();

@@ -7,7 +7,6 @@
 
 
 
-
 // =======================================================
 // low level functions
 // =======================================================
@@ -61,7 +60,9 @@ void display_course(char* course){
     print_course(course);
 }
 
-void display_all(){}
+void display_all(){
+    print_all_courses();
+}
 
 /*
     int main(int argc, char** argv){

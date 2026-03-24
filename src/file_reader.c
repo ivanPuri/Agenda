@@ -48,13 +48,14 @@ bool unload(int list_size){ // DO NOT write pointers
     if (valid_magic(fp)){
         fwrite(&list_size, sizeof(int), 1, fp); // the total number of course nodes in the list 
 
+
         for(Course* curr = clist_head; curr != NULL; curr = curr->next){ // writing every course node
             fwrite(&curr->name, sizeof(curr->name), 1, fp);
             fwrite(&curr->list_size, sizeof(curr->list_size), 1, fp);
             for(Item* curr_item = curr->item_head; curr_item != NULL; curr_item = curr_item->next){ // writing every item node per course node
                 fwrite(&curr_item->due_date, sizeof(curr_item->due_date), 1, fp);
                 fwrite(&curr_item->name, sizeof(curr_item->name), 1, fp);
-            }            
+            }        
         }
         fclose(fp);
         return true;
