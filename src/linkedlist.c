@@ -74,7 +74,7 @@ static void print_course_iterate(Course* course){
     printf("== = == = == = == = == = - %s - = == = == = == = == = ==\n", course->name);
     for(Item* item = course->item_head; item != NULL; item = item->next){
         char buffer[64];
-get_str_from_time(item->due_date, buffer, sizeof(buffer));
+        get_str_from_time(item->due_date, buffer, sizeof(buffer));
         printf("Entry %d: %s -=- Due: %s \n", i++, item->name, buffer);
     } 
 }
@@ -134,6 +134,7 @@ void print_all_courses(){
     else{
         for (Course* curr = clist_head; curr != NULL; curr = curr->next){
             print_course_iterate(curr);
+            puts("\n");
         }
     }
 }

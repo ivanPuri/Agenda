@@ -49,7 +49,7 @@ void test3(){
     //course 1
     char* assignment_name = "hw1";
     char* course_name = "449";
-    char* date = "Monday";
+    char* date = "July 14, 4:20 pm";
     add(assignment_name, course_name, date);
 
     assignment_name = "hw2";
@@ -103,10 +103,10 @@ void test3(){
 void test4(){
     start(); // function for getting the ape.bin magic written
     
-    test3(); // populating memory
+    // test3(); // populating memory
+    // unload(clist_size); 
 
-    unload(clist_size); 
-    // int size = load_in();
+    int size = load_in();
 
     // printf("size = %i\n\n\n", size);
     printf("\n\n\n\n MAIN PRINT CHECK\n");
@@ -123,7 +123,7 @@ void test5(){
 
 int main(int argc, char** argv){
     // load_in();
-    test1();
+    test4();
 
     // if (argc == 1)
     //     display_all();

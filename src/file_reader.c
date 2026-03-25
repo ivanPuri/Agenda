@@ -9,6 +9,7 @@
 // LOW LEVEL FUNCTIONS
 //==================================================
 
+
 static FILE* get_fp(){
     FILE* fp = fopen(FILE_NAME, "r+b");
     if (fp != NULL) return fp;
@@ -33,6 +34,14 @@ static bool valid_magic(FILE* fp){
     else return false;
 }
 
+static FILE* get_write_fp(){
+    FILE* fp = fopen(FILE_NAME, "w+b");
+    fwrite(MAGIC, 1, sizeof(MAGIC)-1, fp);
+    bool valid = valid_magic(fp);
+    if (valid) return fp;
+    else return NULL;
+}
+
 static int get_num_courses(FILE* fp){
     int number_of_courses;
     fread(&number_of_courses, sizeof(int), 1, fp);
@@ -44,7 +53,7 @@ static int get_num_courses(FILE* fp){
 //==================================================
 
 bool unload(int list_size){ // DO NOT write pointers 
-    FILE* fp = get_fp();
+    FILE* fp = get_write_fp();
     if (valid_magic(fp)){
         fwrite(&list_size, sizeof(int), 1, fp); // the total number of course nodes in the list 
 
