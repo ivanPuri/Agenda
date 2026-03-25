@@ -13,6 +13,11 @@ Course* clist_tail = NULL;
 // low level functions
 //==================================================
 
+static void get_str_from_time(time_t t, char* buffer, size_t size){
+    struct tm *tm_info = localtime(&t);
+    strftime(buffer, size, "%Y-%m-%d %H:%M:%S", tm_info);
+}
+
 static void read_from_file(){
     clist_size = load_in();
 }
@@ -66,11 +71,14 @@ static void add_item(Item* new_item, Course* course){
 
 static void print_course_iterate(Course* course){
     int i = 1;
-       printf("== = == = == = == = == = - %s - = == = == = == = == = ==\n", course->name);
-       for(Item* item = course->item_head; item != NULL; item = item->next){
-            printf("Entry %d: %s\n",i++, item->name);
-       } 
+    printf("== = == = == = == = == = - %s - = == = == = == = == = ==\n", course->name);
+    for(Item* item = course->item_head; item != NULL; item = item->next){
+        char buffer[64];
+get_str_from_time(item->due_date, buffer, sizeof(buffer));
+        printf("Entry %d: %s -=- Due: %s \n", i++, item->name, buffer);
+    } 
 }
+
 
 //==================================================
 // High level functions
