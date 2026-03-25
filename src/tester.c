@@ -123,7 +123,7 @@ void test5(){
 
 int main(int argc, char** argv){
     // load_in();
-    test4();
+    test5();
 
     // if (argc == 1)
     //     display_all();

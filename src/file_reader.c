@@ -123,8 +123,8 @@ void start(void){
     FILE *fp = get_fp();
     // writing just the MAGIC characters, not the null terminator, hence -1
     fwrite(MAGIC, 1, sizeof(MAGIC)-1, fp);
-    bool valid = valid_magic(fp);
-    printf("valid: %i", valid);
+    // bool valid = valid_magic(fp);
+    // printf("valid: %i", valid);
     
     fclose(fp);
 
