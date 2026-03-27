@@ -35,3 +35,4 @@ void create_item(Item* new_item, Course* course, char* course_name);
 bool is_new_course(char* name);
 void print_course(char* course_name);
 void print_all_courses();
+char* get_time(Item* item, char* buffer, int size);

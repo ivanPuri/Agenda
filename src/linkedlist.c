@@ -15,7 +15,7 @@ Course* clist_tail = NULL;
 
 static void get_str_from_time(time_t t, char* buffer, size_t size){
     struct tm *tm_info = localtime(&t);
-    strftime(buffer, size, "%Y-%m-%d %H:%M:%S", tm_info);
+    strftime(buffer, size, "%Y-%m-%d %H:%M:%S\0", tm_info);
 }
 
 static void read_from_file(){
@@ -139,6 +139,10 @@ void print_all_courses(){
     }
 }
 
+char* get_time(Item* item, char* buffer, int size){
+    get_str_from_time(item->due_date, buffer, size);
+    return buffer;
+}
 
 
 
