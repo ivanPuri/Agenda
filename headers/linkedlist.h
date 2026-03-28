@@ -16,7 +16,7 @@
 typedef struct Item {
     struct Item* next;
     time_t due_date;
-    char name[20];
+    char name[30];
 } Item;
 
 typedef struct Course {
@@ -29,6 +29,7 @@ typedef struct Course {
 
 extern int clist_size;
 extern Course* clist_head;
+
 
 void create_course(Course* new_course, char* course_name);
 void create_item(Item* new_item, Course* course, char* course_name);

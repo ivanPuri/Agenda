@@ -103,10 +103,10 @@ void test3(){
 void test4(){
     start(); // function for getting the ape.bin magic written
     
-    // test3(); // populating memory
-    // unload(clist_size); 
+    test3(); // populating memory
+    unload(clist_size); 
 
-    int size = load_in();
+    // int size = load_in();
 
     // printf("size = %i\n\n\n", size);
     printf("\n\n\n\n MAIN PRINT CHECK\n");

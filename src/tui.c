@@ -8,6 +8,50 @@ int cmd_h, cmd_w, cmd_y, cmd_x;
 // =======================================================
 // low level functions
 // =======================================================
+
+static char* second_win_input(WINDOW* win){
+    char* input = (char*) malloc(30);
+    int i = 0;
+
+    while (true){
+        char ch = wgetch(win);
+        
+        if (ch == '\n') {
+            break;
+        }
+        if (i >= 29) return NULL;  // Leave room for null terminator
+        input[i++] = ch;
+    }
+    input[i] = '\0';  // Null terminate the string
+    return input;
+}
+
+static void add(WINDOW* win){
+    wmove(win, 1, 1);
+    waddstr(win, "Enter Course Name: ");
+    wrefresh(win);
+    char* course_name = second_win_input(win);
+    
+    if (!course_name){
+        wmove(win, 1, 1);
+        Course* course;
+
+        if (is_new_course(course_name)){ // new course
+            create_course(course, course_name);
+        }
+
+        waddstr(win, "Enter Assignment Name: ");
+        char* item_name = second_win_input(win);
+
+        Item* assignment;
+        strcpy(assignment->name, item_name);
+
+        create_item(assignment, course, item_name);
+        free(item_name);
+    }
+    
+}
+
 static WINDOW* cmd_window(){
     cmd_h = 5;
     cmd_w = 50;
@@ -73,23 +117,30 @@ static void main_display(){
 static char* get_cmd(){
     char* cmd = (char*) malloc(30);
     int i = 0;
+
+
     while (true){
         char ch = getch();
         
         if (ch == '\n') {
-            cmd[i++] = ch;
-            if (i > 30) return NULL;
             break;
         }
+        if (i >= 29) return NULL;  // Leave room for null terminator
+        cmd[i++] = ch;
     }
+    cmd[i] = '\0';  // Null terminate the string
     return cmd;     
 }
 
 static void handle_cmd(char* cmd){
-    if (strcmp(cmd, "add")){
-        WINDOW* center_win = cmd_window();
-        wmove(center_win, cmd_y, cmd_x);
+    WINDOW* center_win = cmd_window();
+   
+    if (strcmp(cmd, "add") == 0){ // add ui function
+        add(center_win);
     }
+
+    delwin(center_win);
+    free(cmd);
 } 
 
 static bool handle_input(){
@@ -97,11 +148,14 @@ static bool handle_input(){
     clrtoeol();
     
     if (input == ':'){
+        nodelay(stdscr, FALSE);  // Enable blocking input for command mode
         curs_set(1);
         char* cmd = get_cmd();
         if (cmd != NULL) {
             handle_cmd(cmd);
         }
+        nodelay(stdscr, TRUE);  // Re-enable non-blocking for main loop
+        curs_set(0);
 
     }else if (input == 'q'){
         return false;
