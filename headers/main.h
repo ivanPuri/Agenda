@@ -2,7 +2,7 @@
 #include "linkedlist.h"
 
 Item* done(char* name);
-void add(char* name, char* course, char* due); 
+void add_assignment(char* name, char* course, char* due); 
 void edit(char* name);
 void display_item(char* course, char* name);
 void display_course(char* course);

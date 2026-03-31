@@ -60,7 +60,7 @@ Item* done(char* name){
     return NULL;
 }
 
-void add(char* name, char* course, char* due){
+void add_assignment(char* name, char* course, char* due){
 
     time_t date = valid_date(due);
     if (date == (time_t) - 1){

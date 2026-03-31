@@ -6,17 +6,17 @@ void test1(){
     char* assignment_name = "hw1";
     char* course_name = "449";
     char* date = "Monday";
-    add(assignment_name, course_name, date);
+    add_assignment(assignment_name, course_name, date);
 
     assignment_name = "hw2";
     course_name = "590";
     date = "Wednesday";
-    add(assignment_name, course_name, date);
+    add_assignment(assignment_name, course_name, date);
 
     assignment_name = "hw3";
     course_name = "1530";
     date = "Friday";
-    add(assignment_name, course_name, date);
+    add_assignment(assignment_name, course_name, date);
 
     printf("\n\nFINAL PRINT CHECK\n");
     print_all_courses();
@@ -27,17 +27,17 @@ void test2(){
     char* assignment_name = "hw1";
     char* course_name = "449";
     char* date = "Monday";
-    add(assignment_name, course_name, date);
+    add_assignment(assignment_name, course_name, date);
 
     assignment_name = "hw2";
     course_name = "449";
     date = "Wednesday";
-    add(assignment_name, course_name, date);
+    add_assignment(assignment_name, course_name, date);
 
     assignment_name = "hw3";
     course_name = "449";
     date = "Friday";
-    add(assignment_name, course_name, date);
+    add_assignment(assignment_name, course_name, date);
 
 
     printf("\n\nFINAL PRINT CHECK\n");
@@ -50,49 +50,49 @@ void test3(){
     char* assignment_name = "hw1";
     char* course_name = "449";
     char* date = "July 14, 4:20 pm";
-    add(assignment_name, course_name, date);
+    add_assignment(assignment_name, course_name, date);
 
     assignment_name = "hw2";
     course_name = "449";
     date = "Wednesday";
-    add(assignment_name, course_name, date);
+    add_assignment(assignment_name, course_name, date);
 
     assignment_name = "hw3";
     course_name = "449";
     date = "Friday";
-    add(assignment_name, course_name, date);
+    add_assignment(assignment_name, course_name, date);
 
     //course 2
     assignment_name = "hw4";
     course_name = "590";
     date = "Monday";
-    add(assignment_name, course_name, date);
+    add_assignment(assignment_name, course_name, date);
 
     assignment_name = "hw5";
     course_name = "590";
     date = "Wednesday";
-    add(assignment_name, course_name, date);
+    add_assignment(assignment_name, course_name, date);
 
     assignment_name = "hw6";
     course_name = "590";
     date = "Friday";
-    add(assignment_name, course_name, date);
+    add_assignment(assignment_name, course_name, date);
 
     //course 3
     assignment_name = "hw7";
     course_name = "1530";
     date = "Monday";
-    add(assignment_name, course_name, date);
+    add_assignment(assignment_name, course_name, date);
 
     assignment_name = "hw8";
     course_name = "1530";
     date = "Wednesday";
-    add(assignment_name, course_name, date);
+    add_assignment(assignment_name, course_name, date);
 
     assignment_name = "hw9";
     course_name = "1530";
     date = "Friday";
-    add(assignment_name, course_name, date);
+    add_assignment(assignment_name, course_name, date);
 
     printf("\n\nFINAL PRINT CHECK\n");
     print_all_courses();

@@ -1,5 +1,6 @@
 #include <ncurses.h>
 #include <linkedlist.h>
+#include <main.h>
 
 int H, W;
 int cmd_h, cmd_w, cmd_y, cmd_x;
@@ -33,12 +34,6 @@ static void add(WINDOW* win){
     char* course_name = second_win_input(win);
     
     if (course_name){
-        Course* course = (Course*) malloc(sizeof(Course));
-        Item* assignment = (Item*) calloc(1, sizeof(Item));
-        if (is_new_course(course_name)){ // new course
-            create_course(course, course_name);
-        }
-
         wmove(win, 1, 1);
         wclrtoeol(win);
         waddstr(win, "Enter Assignment Name: ");
@@ -46,30 +41,30 @@ static void add(WINDOW* win){
         
         char* item_name = second_win_input(win);
         if (item_name){
-            strcpy(assignment->name, item_name);
-            // create_item(assignment, course, item_name);
-            free(item_name);
+            wmove(win, 1, 1);
+            wclrtoeol(win);
+            waddstr(win, "Enter Assignment Due Date: ");
+            wrefresh(win);
+           
+            char* due_date = second_win_input(win);
+            if (due_date){
+                add_assignment(item_name, course_name, due_date);
+            }
         }
 
-        wmove(win, 1, 1);
-        wclrtoeol(win);
-        waddstr(win, "Enter Assignment Due Date: ");
-        wrefresh(win);
-        
-        char* due_date = second_win_input(win);
-        if (due_date){
-            // strcpy(assignment->name, item_name);
-            create_item(assignment, course, item_name);
-        }
-
-        wmove(win, 1, 1);
-        wclrtoeol(win);
+        // wmove(win, 1, 1);
+        // wclrtoeol(win);
     }
     free(course_name);
 
 }
 
+static void set_size(){
+  getmaxyx(stdscr, H, W);
+}
+
 static WINDOW* cmd_window(){
+    set_size();
     cmd_h = 5;
     cmd_w = 50;
     cmd_y = (H - cmd_h) / 2;
@@ -82,10 +77,6 @@ static WINDOW* cmd_window(){
     wrefresh(win);
 
     return win;
-}
-
-static void set_size(){
-  getmaxyx(stdscr, H, W);
 }
 
 static void draw_borders(){
@@ -102,6 +93,8 @@ static void draw_borders(){
 }
 
 static void main_display(){
+    set_size();
+    draw_borders();
     int course_w = 3;
     int course_h = 2;
     int item_w = 4;
@@ -156,7 +149,13 @@ static void handle_cmd(char* cmd){
         add(center_win);
     }
 
+
+
+    // clean up
+    werase(center_win);
+    wrefresh(center_win);
     delwin(center_win);
+    clear();
     refresh();
     main_display();
     free(cmd);
@@ -196,9 +195,7 @@ void start_window(){
     curs_set(0);
     // keypad(stdscr, TRUE);      
     nodelay(stdscr, TRUE);   
-    set_size();
 
-    draw_borders();
     main_display();
     bool cond = true;
     move(H - 2, 0);
