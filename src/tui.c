@@ -32,24 +32,41 @@ static void add(WINDOW* win){
     wrefresh(win);
     char* course_name = second_win_input(win);
     
-    if (!course_name){
-        wmove(win, 1, 1);
-        Course* course;
-
+    if (course_name){
+        Course* course = (Course*) malloc(sizeof(Course));
+        Item* assignment = (Item*) calloc(1, sizeof(Item));
         if (is_new_course(course_name)){ // new course
             create_course(course, course_name);
         }
 
+        wmove(win, 1, 1);
+        wclrtoeol(win);
         waddstr(win, "Enter Assignment Name: ");
+        wrefresh(win);
+        
         char* item_name = second_win_input(win);
+        if (item_name){
+            strcpy(assignment->name, item_name);
+            // create_item(assignment, course, item_name);
+            free(item_name);
+        }
 
-        Item* assignment;
-        strcpy(assignment->name, item_name);
+        wmove(win, 1, 1);
+        wclrtoeol(win);
+        waddstr(win, "Enter Assignment Due Date: ");
+        wrefresh(win);
+        
+        char* due_date = second_win_input(win);
+        if (due_date){
+            // strcpy(assignment->name, item_name);
+            create_item(assignment, course, item_name);
+        }
 
-        create_item(assignment, course, item_name);
-        free(item_name);
+        wmove(win, 1, 1);
+        wclrtoeol(win);
     }
-    
+    free(course_name);
+
 }
 
 static WINDOW* cmd_window(){
@@ -140,6 +157,8 @@ static void handle_cmd(char* cmd){
     }
 
     delwin(center_win);
+    refresh();
+    main_display();
     free(cmd);
 } 
 

@@ -1,4 +1,3 @@
-#include <stdbool.h>
 #include "../headers/linkedlist.h"
 
 #define FILE_NAME "ape.bin"
