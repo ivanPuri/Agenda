@@ -16,6 +16,7 @@ static char* second_win_input(WINDOW* win){
 
     while (true){
         char ch = wgetch(win);
+        if (ch == 27) return NULL;
         
         if (ch == '\n') {
             break;
@@ -51,11 +52,7 @@ static void add(WINDOW* win){
                 add_assignment(item_name, course_name, due_date);
             }
         }
-
-        // wmove(win, 1, 1);
-        // wclrtoeol(win);
     }
-    free(course_name);
 
 }
 
@@ -124,10 +121,18 @@ static void main_display(){
     }
 }
 
+static void clean_up_second_window(WINDOW* center_win){
+    werase(center_win);
+    wrefresh(center_win);
+    delwin(center_win);
+    clear();
+    refresh();
+    main_display();
+}
+
 static char* get_cmd(){
     char* cmd = (char*) malloc(30);
     int i = 0;
-
 
     while (true){
         char ch = getch();
@@ -149,15 +154,9 @@ static void handle_cmd(char* cmd){
         add(center_win);
     }
 
-
-
     // clean up
-    werase(center_win);
-    wrefresh(center_win);
-    delwin(center_win);
-    clear();
-    refresh();
-    main_display();
+    clean_up_second_window(center_win);
+
     free(cmd);
 } 
 
@@ -190,6 +189,7 @@ static bool handle_input(){
 
 void start_window(){
     initscr();
+    set_escdelay(0);  // Remove delay when ESC is pressed
     cbreak();
     // noecho();
     curs_set(0);
@@ -198,8 +198,8 @@ void start_window(){
 
     main_display();
     bool cond = true;
-    move(H - 2, 0);
     while(cond){
+        move(H - 2, 0);
         cond = handle_input();
     }
 
