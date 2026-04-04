@@ -16,13 +16,30 @@ static char* second_win_input(WINDOW* win){
 
     while (true){
         int ch = wgetch(win);
-        if (ch == 27) return NULL; // esc
+
+         if (i != 0 && (ch == 127 || ch == 8 || ch == '\b')){
+            int y, x;
+           
+            // removing backspace echo '^?'
+            getyx(win, y, x);
+            move(y, x - 3);
+            addch(' ');
+            addch(' ');
+            addch(' '); // removing the actual char
+            move(y, x - 3);
+
+            input[i--] = '\0';
+            refresh();
+        }
+
+
+        else if (ch == 27) return NULL; // esc
         
-        if (ch == '\n') {
+        else if (ch == '\n') {
             break;
         }
-        if (i >= 29) return NULL;  // Leave room for null terminator
-        input[i++] = ch;
+        else if (i >= 29) return NULL;  // Leave room for null terminator
+        else input[i++] = ch;
     }
     input[i] = '\0';  // Null terminate the string
     return input;
@@ -150,12 +167,27 @@ static void clean_up_second_window(WINDOW* center_win){
     main_display();
 }
 
-static char* get_cmd(){
-    char* cmd = (char*) malloc(30);
+static char* get_cmd(WINDOW* win){
+    char* cmd = (char*) calloc(1, 30);
     int i = 0;
 
     while (true){
         int ch = getch();
+
+        if (i != 0 && (ch == 127 || ch == 8 || ch == '\b')){
+            int y, x;
+           
+            // removing backspace echo '^?'
+            getyx(win, y, x);
+            move(y, x - 3);
+            addch(' ');
+            addch(' ');
+            addch(' '); // removing the actual char
+            move(y, x - 3);
+
+            cmd[i--] = '\0';
+            refresh();
+        }
 
         if (ch == 27) return NULL; // esc
         
@@ -185,14 +217,14 @@ static void handle_cmd(char* cmd){
     free(cmd);
 } 
 
-static bool handle_input(){
+static bool handle_input(WINDOW* win){
     int input = getch();
     clrtoeol();
     
     if (input == ':'){
         nodelay(stdscr, FALSE);  // Enable blocking input for command mode
         curs_set(1);
-        char* cmd = get_cmd();
+        char* cmd = get_cmd(win);
         if (cmd != NULL) {
             handle_cmd(cmd);
         }
@@ -213,7 +245,7 @@ static bool handle_input(){
 
 
 void start_window(){
-    initscr();
+    WINDOW* win = initscr();
     set_escdelay(0);  // Remove delay when ESC is pressed
     cbreak();
     // noecho();
@@ -225,7 +257,7 @@ void start_window(){
     bool cond = true;
     while(cond){
         move(H - 2, 0);
-        cond = handle_input();
+        cond = handle_input(win);
     }
 
 
