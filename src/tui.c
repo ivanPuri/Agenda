@@ -70,9 +70,8 @@ static void done_item(WINDOW* win){
         
         char* item_name = second_win_input(win);
         if (item_name){
-            
-           
-            
+            Item* item = get_item(item_name, course_name);
+            if (item) remove_item(course_name, item);            
         }
     }
 }

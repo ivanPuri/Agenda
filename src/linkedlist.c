@@ -56,6 +56,57 @@ static void node_link(void* A, void* B, bool is_course) {
     
 }
 
+static void node_unlink(void* A, void* B, bool is_course){
+    if (is_course){
+        Course* b = (Course*) B;
+        
+        // If unlinking the head, move head to next
+        if (clist_head == b) {
+            clist_head = b->next;
+        } else {
+            // Find previous course and bypass b
+            for (Course* curr = clist_head; curr != NULL; curr = curr->next) {
+                if (curr->next == b) {
+                    curr->next = b->next;
+                    break;
+                }
+            }
+        }
+        
+        // If unlinking the tail, find new tail
+        if (clist_tail == b) {
+            clist_tail = NULL;
+            for (Course* curr = clist_head; curr != NULL; curr = curr->next) {
+                clist_tail = curr;
+            }
+        }
+    }else{
+        Course* a = (Course*) A;
+        Item* b = (Item*) B;
+        
+        // If unlinking the head item, move head to next
+        if (a->item_head == b) {
+            a->item_head = b->next;
+        } else {
+            // Find previous item and bypass b
+            for (Item* curr = a->item_head; curr != NULL; curr = curr->next) {
+                if (curr->next == b) {
+                    curr->next = b->next;
+                    break;
+                }
+            }
+        }
+        
+        // If unlinking the tail item, find new tail
+        if (a->item_tail == b) {
+            a->item_tail = NULL;
+            for (Item* curr = a->item_head; curr != NULL; curr = curr->next) {
+                a->item_tail = curr;
+            }
+        }
+    }
+}
+
 static Course* get_course_node(char* course_name){
     for (Course* curr = clist_head; curr != NULL; curr = curr->next){
         if (strcmp(curr->name, course_name) == 0)
@@ -154,5 +205,9 @@ Item* get_item(char* item_name, char* course_name){
     return NULL;
 }
 
+void remove_item(char* course_name, Item* item){
+    node_unlink(get_course_node(course_name), item, false);
+    free(item);
+}
 
 
