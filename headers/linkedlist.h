@@ -37,3 +37,4 @@ bool is_new_course(char* name);
 void print_course(char* course_name);
 void print_all_courses();
 char* get_time(Item* item, char* buffer, int size);
+Item* get_item(char* item_name, char* course_name);

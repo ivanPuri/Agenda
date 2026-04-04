@@ -86,10 +86,10 @@ static void print_course_iterate(Course* course){
 
 void create_course(Course* new_course, char* course_name){
     strcpy(new_course->name, course_name);
-    // if (clist_head == NULL)
+    if (clist_head == NULL)
+        node_link((void*) clist_head, (void*) new_course, true);
+    else
         node_link((void*) clist_tail, (void*) new_course, true);
-    // else
-    //     node_link((void*) , (void*) new_course);
     clist_size++;
 }
 
@@ -144,6 +144,15 @@ char* get_time(Item* item, char* buffer, int size){
     return buffer;
 }
 
+Item* get_item(char* item_name, char* course_name){
+    Course* course = get_course_node(course_name);
+    for (Item* curr = course->item_head; curr != NULL; curr = curr->next){
+        if (strcmp(curr->name, item_name) == 0 ){
+            return curr;
+        }
+    }
+    return NULL;
+}
 
 
 

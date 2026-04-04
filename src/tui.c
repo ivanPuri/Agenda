@@ -15,8 +15,8 @@ static char* second_win_input(WINDOW* win){
     int i = 0;
 
     while (true){
-        char ch = wgetch(win);
-        if (ch == 27) return NULL;
+        int ch = wgetch(win);
+        if (ch == 27) return NULL; // esc
         
         if (ch == '\n') {
             break;
@@ -54,6 +54,27 @@ static void add(WINDOW* win){
         }
     }
 
+}
+
+static void done_item(WINDOW* win){
+    wmove(win, 1, 1);
+    waddstr(win, "Enter Course Name: ");
+    wrefresh(win);
+    char* course_name = second_win_input(win);
+    
+    if (course_name){
+        wmove(win, 1, 1);
+        wclrtoeol(win);
+        waddstr(win, "Enter Assignment Name: ");
+        wrefresh(win);
+        
+        char* item_name = second_win_input(win);
+        if (item_name){
+            
+           
+            
+        }
+    }
 }
 
 static void set_size(){
@@ -108,7 +129,7 @@ static void main_display(){
         for (Item* icurr = curr->item_head; icurr != NULL; icurr = icurr->next){
             
             addstr(icurr->name);
-            addstr(", ");
+            addstr(": ");
 
             int buffer_size = 64;
             char* time_buffer[64];
@@ -135,13 +156,16 @@ static char* get_cmd(){
     int i = 0;
 
     while (true){
-        char ch = getch();
+        int ch = getch();
+
+        if (ch == 27) return NULL; // esc
         
         if (ch == '\n') {
             break;
+        } else {
+            if (i >= 29) return NULL;  // Leave room for null terminator
+            cmd[i++] = ch;
         }
-        if (i >= 29) return NULL;  // Leave room for null terminator
-        cmd[i++] = ch;
     }
     cmd[i] = '\0';  // Null terminate the string
     return cmd;     
@@ -152,6 +176,8 @@ static void handle_cmd(char* cmd){
    
     if (strcmp(cmd, "add") == 0){ // add ui function
         add(center_win);
+    }else if (strcmp(cmd, "done") == 0){
+        done_item(center_win);
     }
 
     // clean up

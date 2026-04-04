@@ -1,8 +1,10 @@
 #include "../headers/linkedlist.h"
-
 #define FILE_NAME "ape.bin"
 #define MAGIC "APE"
 
+extern int clist_size;
+extern Course* clist_head;
+extern Course* clist_tail;
 
 //==================================================
 // LOW LEVEL FUNCTIONS
@@ -111,6 +113,7 @@ int load_in(){
             
             course->item_tail = item;
         }
+        clist_tail = tmp;  // Set clist_tail to the last course loaded
     }else 
         num_courses = -1;
 
