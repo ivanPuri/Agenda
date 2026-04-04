@@ -79,7 +79,6 @@ int load_in(){
     int num_courses;
 
     if (valid_magic(fp)){
-        int num_items;
         num_courses = get_num_courses(fp);
         Item* item;
         Course* tmp;

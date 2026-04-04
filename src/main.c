@@ -11,6 +11,15 @@
 // low level functions
 // =======================================================
 
+static void read_from_file(){
+    clist_size = load_in();
+}
+
+static void write_to_file(){
+    bool status = unload(clist_size);
+    if (!status) printf("write to file failed");
+}
+
 static time_t valid_date(char* input_date){
 
     PyObject *pName, *pModule, *pFunc, *pArgs, *pValue;
@@ -57,9 +66,6 @@ static time_t valid_date(char* input_date){
 // high level functions
 // =======================================================
 
-Item* done(char* name){
-    return NULL;
-}
 
 void add_assignment(char* name, char* course, char* due){
 
@@ -85,10 +91,6 @@ void add_assignment(char* name, char* course, char* due){
    print_course(course);
 }
 
-void edit(char* name){}
-
-void display_item(char* course, char* name){}
-
 void display_course(char* course){
     print_course(course);
 }
@@ -97,23 +99,20 @@ void display_all(){
     print_all_courses();
 }
 
-    // int main(int argc, char** argv){
-    //     if (argc == 1)
-    //         start_window();
-    //     else if(argc == 3){
-    //         if (strcmp(argv[1], "edit") == 0)
-    //             edit(argv[2]);
-    //         else if(strcmp(argv[1], "done") == 0 )
-    //             done(argv[2]);
-    //         else if(strcmp(argv[1], "display") == 0)
-    //             display_course(argv[2]);
-    //     }else if (argc == 4){
-    //         if (strcmp(argv[1], "display") == 0)
-    //             display_item(argv[2], argv[3]);
-    //     }else if (argc == 5){
-    //         if (strcmp(argv[1], "add") == 0)
-    //             add(argv[2], argv[3], argv[4]);
-    //     }    
+int main(int argc, char** argv){
 
-    //     return 0;
-    // }
+    read_from_file();
+    if (argc == 1)
+        start_window();
+    else if(argc == 2){
+        if (strcmp(argv[1], "status") == 0)
+            display_all();
+    }else if (argc == 3){
+        if (strcmp(argv[1], "-d") == 0)
+            display_course(argv[3]);
+    }
+    display_all();
+    write_to_file();
+
+    return 0;
+}
