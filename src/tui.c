@@ -11,35 +11,38 @@ int cmd_h, cmd_w, cmd_y, cmd_x;
 // =======================================================
 
 static char* second_win_input(WINDOW* win){
-    char* input = (char*) malloc(30);
+    char* input = (char*) calloc(1, 30);
     int i = 0;
 
     while (true){
         int ch = wgetch(win);
 
-         if (i != 0 && (ch == 127 || ch == 8 || ch == '\b')){
+        if (i != 0 && (ch == 127 || ch == 8 || ch == '\b')){
             int y, x;
            
             // removing backspace echo '^?'
             getyx(win, y, x);
-            move(y, x - 3);
-            addch(' ');
-            addch(' ');
-            addch(' '); // removing the actual char
-            move(y, x - 3);
+            wmove(win, y, x - 3);
+            waddch(win, ' ');
+            waddch(win, ' ');
+            waddch(win, ' '); // removing the actual char
+            wmove(win, y, x - 3);
 
             input[i--] = '\0';
             refresh();
         }
 
 
-        else if (ch == 27) return NULL; // esc
+        if (ch == 27) return NULL; // esc
         
-        else if (ch == '\n') {
+        if (ch == '\n') {
             break;
         }
-        else if (i >= 29) return NULL;  // Leave room for null terminator
-        else input[i++] = ch;
+        else{
+            if (i >= 29) return NULL;  // Leave room for null terminator
+            input[i++] = ch;
+        } 
+            
     }
     input[i] = '\0';  // Null terminate the string
     return input;
