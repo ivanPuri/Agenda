@@ -151,7 +151,7 @@ static void main_display(){
             addstr(": ");
 
             int buffer_size = 64;
-            char* time_buffer[64];
+            char time_buffer[64];
             get_time(icurr, time_buffer, buffer_size);
             addstr(time_buffer);
             

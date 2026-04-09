@@ -84,7 +84,7 @@ static void node_unlink(void* A, void* B, bool is_course){
             for (Item* curr = a->item_head->next; curr != NULL; curr = curr->next) {
                 if (curr->next == b){
                     curr->next = NULL;
-                    a->item_tail == NULL;
+                    a->item_tail = NULL;
                     break;
                 }
 
