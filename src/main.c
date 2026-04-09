@@ -105,11 +105,11 @@ int main(int argc, char** argv){
     if (argc == 1)
         start_window();
     else if(argc == 2){
-        if (strcmp(argv[1], "status") == 0)
-            display_all();
+       // if (strcmp(argv[1], "status") == 0)
+            //display_all();
     }else if (argc == 3){
         if (strcmp(argv[1], "-d") == 0)
-            display_course(argv[3]);
+            display_course(argv[2]);
     }
     display_all();
     write_to_file();
