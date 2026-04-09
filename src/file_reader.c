@@ -111,8 +111,10 @@ int load_in(){
                 
                 if (b == course->list_size - 1) course->item_tail = item;
             }
+            
+            if (i == num_courses - 1) clist_tail = tmp;  // Set clist_tail to the last course loaded
         }
-        clist_tail = tmp;  // Set clist_tail to the last course loaded
+        
     }else 
         num_courses = -1;
 
