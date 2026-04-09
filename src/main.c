@@ -1,8 +1,8 @@
+#include <Python.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include "../headers/linkedlist.h"
 #include "../headers/tui.h"
-#include <Python.h>
 
 
 

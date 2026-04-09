@@ -108,9 +108,9 @@ int load_in(){
 
                 fread(&item->due_date, sizeof(item->due_date), 1, fp);
                 fread(&item->name, sizeof(item->name), 1, fp);
+                
+                if (b == course->list_size - 1) course->item_tail = item;
             }
-            
-            course->item_tail = item;
         }
         clist_tail = tmp;  // Set clist_tail to the last course loaded
     }else 

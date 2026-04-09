@@ -15,7 +15,7 @@ Course* clist_tail = NULL;
 
 static void get_str_from_time(time_t t, char* buffer, size_t size){
     struct tm *tm_info = localtime(&t);
-    strftime(buffer, size, "%Y-%m-%d %H:%M:%S\0", tm_info);
+    strftime(buffer, size, "%Y-%m-%d %H:%M:%S", tm_info);
 }
 
 static void node_link(void* A, void* B, bool is_course) {
