@@ -7,10 +7,10 @@ LIBS = -lncurses $(PY_LDFLAGS)
 SOURCES = src/main.c src/linkedlist.c src/file_reader.c src/tester.c src/tui.c
 
 app: $(SOURCES)
-	$(CC) $(CFLAGS) $(SOURCES) -o app $(LIBS)
+	$(CC) $(CFLAGS) $(SOURCES) -o agenda $(LIBS)
 
 clean:
-	rm -rf app *.dSYM
+	rm -rf agenda *.dSYM
 
 run: app
-	./app
+	./agenda
