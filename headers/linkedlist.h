@@ -5,7 +5,6 @@
 #include <time.h>
 #include <string.h>
 #include "file_reader.h"
-#include <Python.h>
 
 
 
